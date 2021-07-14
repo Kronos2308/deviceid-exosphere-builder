@@ -69,9 +69,8 @@ To build the same Exosphere custom binary without using the Docker image, you ha
 - Run the following command, to modify the DeviceId value in the patch and apply the patch (tested only on linux):
     ```bash
     export DEVICEID=0x0022334455667788
-    sed -i "s/###DEVICEID###/$DEVICEID/g" deviceid.patch
+    sed -i "/u64 GetDeviceId() {/c\    u64 GetDeviceId() { return $DEVICEID;" libraries/libexosphere/source/fuse/fuse_api.cpp
 
-    git am deviceid.patch
     ```
 - Go to the `exosphere` directory, inside the repo
 - Build `exosphere`: 
